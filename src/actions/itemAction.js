@@ -31,18 +31,36 @@ export const addItem=(item)=>async dispatch=>{
 }
 
 
-export const editItem=(item)=>async dispatch=>{
+export const editItem=(id,item)=>async dispatch=>{
 
     dispatch({type: 'EDIT_ITEM_REQUEST'})
 
     try {
-        const response = await axios.put(`/api/items/getallitems/${item}`, item)
+        const response = await axios.put(`/api/items/getallitems/${id}`, item)
         console.log(response);
         dispatch({type: 'EDIT_ITEM_SUCCESS'})
 
         
     } catch (error) {
         dispatch({type: 'EDIT_ITEM_FAILED',payload: error})
+
+    }
+
+}
+
+
+export const deleteItem=(id,item)=>async dispatch=>{
+
+    dispatch({type: 'DELETE_ITEM_REQUEST'})
+
+    try {
+        const response = await axios.delete(`/api/items/getallitems/${id}`, item)
+        console.log(response);
+        dispatch({type: 'DELETE_ITEM_SUCCESS'})
+
+        
+    } catch (error) {
+        dispatch({type: 'DELETE_ITEM_FAILED',payload: error})
 
     }
 

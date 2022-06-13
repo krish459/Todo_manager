@@ -4,12 +4,13 @@ import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
 import {composeWithDevTools} from 'redux-devtools-extension'
-import { addItemReducer, getAllItemsReducer,editItemReducer } from './reducers/itemReducer'
+import { addItemReducer, getAllItemsReducer,editItemReducer , deleteItemReducer} from './reducers/itemReducer'
 
 const finalReducer = combineReducers({
     getAllItemsReducer : getAllItemsReducer,
     addItemReducer : addItemReducer,
-    editItemReducer : editItemReducer
+    editItemReducer : editItemReducer,
+    deleteItemReducer : deleteItemReducer
 })
 
 const initialState = {

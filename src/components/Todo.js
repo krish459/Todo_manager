@@ -3,8 +3,10 @@ import { Modal } from 'react-bootstrap';
 
 import {useDispatch, useSelector} from 'react-redux'
 import { editItem } from '../actions/itemAction';
+import { deleteItem } from '../actions/itemAction';
 // import { getAllItems } from '../actions/itemAction'
 import '../index.css';
+import Updateitemscreen from '../screens/Updateitemscreen';
 
 
 export default function Todo( {todo} ) {
@@ -12,27 +14,21 @@ export default function Todo( {todo} ) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    const [showupdate, setShowupdate] = useState(false);
+    const handleupdateClose = () => setShowupdate(false);
+    const handleupdateShow = () => setShowupdate(true);
+
     const dispatch = useDispatch()
 
     
-    // useEffect(() => {
-    //     //  dispatch(editItem());
-    //     var m = todo._id;
-    //     console.log(m);
-    //    }, [])
-       
     
-    // function updatehere(){
-    //     var m = todo._id;
-    //     console.log(m);
-    //     dispatch(editItem(m))
-    // }
 
 
-    function deletehere(){
-        var m = todo._id;
-        console.log(m);
-        dispatch(editItem(m))
+    function handleDelete(){
+        var id = todo._id;
+        
+        dispatch(deleteItem(id,todo))
     }
     
     return (
@@ -50,10 +46,10 @@ export default function Todo( {todo} ) {
                 </div>
             </div>
                 <div className='m-1 w-100'>
-                    <button className="btn mx-2">
-                        <a  href="/additem">Edit</a>
+                    <button className="btn mx-2" onClick={()=>handleupdateShow()}>
+                        <a>Edit</a>
                     </button>
-                    <button className="btn mx-2" onClick={deletehere}>
+                    <button className="btn mx-2" onClick={()=>handleDelete()}>
                     <a>Delete</a>
                     </button>
 
@@ -71,6 +67,20 @@ export default function Todo( {todo} ) {
 
                 <Modal.Footer>
                     <button className='btn' onClick={handleClose}>Close</button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showupdate} onHide={handleupdateClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{todo.title}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Updateitemscreen todo={todo}/>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <button className='btn' onClick={handleupdateClose}>Close</button>
                 </Modal.Footer>
             </Modal>
         </div>    

@@ -61,3 +61,24 @@ export const editItemReducer = (state={}, action)=>{
 
 
 }
+
+export const deleteItemReducer = (state={}, action)=>{
+
+    switch(action.type)
+    {
+        case 'EDIT_ITEM_REQUEST' : return{
+            loading : true
+        }
+        case 'EDIT_ITEM_SUCCESS' : return{
+            loading : false,
+            success: true
+        }
+        case 'EDIT_ITEM_FAILED' : return{
+            loading : false,
+            error:action.payload
+        }
+        default : return state
+    }
+
+
+}

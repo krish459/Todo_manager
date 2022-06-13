@@ -21,9 +21,10 @@ export default function Homescreen() {
     <div>
         <div className="row">
             <h2> List of Your TODO's</h2>
+            <h2> There are {items.length} tasks left </h2>
             
             {items.map(todo=>{
-                return <div className="col-md-8">
+                return <div className="col-md-8">   
                     <div key={todo._id}>
                         <Todo todo={todo}/>
                     </div>
