@@ -43,17 +43,32 @@ router.put('/getallitems/:id', async (req, res) => {
       const newItem = await Item.findOne({ _id: req.params.id})    
   
       if (!newItem) {
-        res.status(404).send()
+        res.status(404).send('Item not updated')
       }
       
       updates.forEach((update) => newItem[update] = req.body[update])
       await newItem.save()
-  
-      
   
       res.send(newItem)
     } catch(e) {
       res.status(400).send()
     } 
   })
+
+  router.delete('/getallitems/:id',  async (req, res) => {
+    try{
+      const item = await Item.findOneAndDelete({_id: req.params.id})
+      res.send('Item Deleted successfully');
+  
+      if(!item) {
+        res.status(404).send()
+      }
+  
+      res.send(item)
+  
+    } catch(error) {
+      return res.status(400).json({ message: error });
+    }
+  })
+
 module.exports = router;
